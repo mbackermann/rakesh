@@ -4,7 +4,7 @@ import OAuthClient from '../services/auth'
 import Head from 'next/head'
 
 // This gets called on every request
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query }: any) {
   try {
     const { char } = query
     let charName = char?.toLowerCase() || 'rakesh'
@@ -16,7 +16,7 @@ export async function getServerSideProps({ query }) {
     ).then((data) => data.json())
 
     const charImageUrl = imageObj.assets.find(
-      (asset) => asset.key == 'main'
+      (asset: any) => asset.key == 'main'
     )?.value
 
     const charData = await fetch(
@@ -39,7 +39,7 @@ export async function getServerSideProps({ query }) {
   }
 }
 
-export default function Home({ data }) {
+export default function Home({ data }: any) {
   if (data.error) {
     return (
       <>
@@ -72,6 +72,7 @@ export default function Home({ data }) {
             .join('_')}.png`}
           width="32"
           height="32"
+          alt={`Class Icon for ${data.charClass}`}
         />
         {data.charClass}
       </h4>
@@ -80,6 +81,7 @@ export default function Home({ data }) {
           src={`/icons/${data.faction.toLowerCase()}.png`}
           width="32"
           height="32"
+          alt={`Faction Icon for ${data.faction}`}
         />
         {data.race}
       </h4>

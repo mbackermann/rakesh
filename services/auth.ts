@@ -1,8 +1,11 @@
 import { ClientCredentials } from 'simple-oauth2'
 
 export default class OAuthClient {
+  public client: any
+  public token: any
+
   constructor() {
-    const oauthOptions = {
+    const oauthOptions: any = {
       client: {
         id: process.env.BLIZZARD_API_KEY,
         secret: process.env.BLIZZARD_SECRET_KEY,
@@ -23,7 +26,7 @@ export default class OAuthClient {
         this.token = this.client.createToken(token.token)
       }
       return this._reduceToken(this.token)
-    } catch (err) {
+    } catch (err: any) {
       console.error(
         `Failed to retrieve client credentials oauth token: ${err.message}`
       )
@@ -31,7 +34,7 @@ export default class OAuthClient {
     }
   }
 
-  _reduceToken(token) {
+  _reduceToken(token: any) {
     return token.token.access_token
   }
 }
